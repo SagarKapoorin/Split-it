@@ -7,14 +7,17 @@ import { createTheme } from "@mui/material/styles";
 import { themeSettings } from './theme'
 import io from "socket.io-client";
 function App() {
-  const mode = useSelector((state) => state.mode);
-  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
-  const isAuth = Boolean(useSelector((state) => state.token));
+  // const mode = useSelector((state) => state.mode);
+  // const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+  // const isAuth = Boolean(useSelector((state) => state.token));
+  const ho=()=>{
+    window.open("http://localhost:6001/auth/google","_self");
+  }
   const socket=io("http://localhost:6001/");
   return (
     <>
      <div className="app">
-     <BrowserRouter>
+     {/* <BrowserRouter>
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Routes>
@@ -26,7 +29,8 @@ function App() {
 
           </Routes>
         </ThemeProvider>
-      </BrowserRouter>
+      </BrowserRouter> */}
+      <button onClick={ho}></button>
      </div>
     </>
   )
