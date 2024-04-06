@@ -62,8 +62,14 @@ passport.use(
   clientSecret: process.env.CLIENT_SECRET,
   callbackURL: "http://localhost:6001/auth/google/callback",
   scope:["profile","email"]
- },(accessToken, refreshToken, profile, cb) =>{
-  console.log(profile);
+ },async (accessToken, refreshToken, profile, done) =>{
+  try{
+    console.log(profile);
+    return done(null,profile)
+  }catch(err){
+    console.log(err);
+    return done(err,null);
+  }
  })
 )
 passport.serializeUser((user,done)=>{
@@ -83,9 +89,10 @@ app.get("/yes",(req,res)=>{
 app.get("/auth/google",passport.authenticate("google",{scope:["profile","email"]}));
 
 app.get("/auth/google/callback",passport.authenticate("google",{
-  successRedirect:"/no",
-  failureRedirect:"/yes"
-}))
+  failureRedirect:"/no"
+}),function(req,res){
+  res.redirect("/yes");
+})
 
 io.on("connection",(socket)=>{
   console.log("user-connected");
