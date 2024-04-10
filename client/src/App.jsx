@@ -4,13 +4,15 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
-import { themeSettings } from './theme'
+import { themeSettings } from './theme';
+import Calculator from './components/Calculator/index';
+import Com from './components/Addwidgets/Calcul';
 import io from "socket.io-client";
 function App() {
   const mode = useSelector((state) => state.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
-  const isAuth = Boolean(useSelector((state) => state.token));
-  const socket=io("http://localhost:6001/");
+  // const isAuth = Boolean(useSelector((state) => state.token));
+  // const socket=io("http://localhost:6001/");
   return (
     <>
      <div className="app">
@@ -18,11 +20,11 @@ function App() {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Routes>
-            <Route path="/" element={<LoginPage />} />
-            <Route
+            <Route path="/" element={<Com />} />
+            {/* <Route
               path="/home"
               element={isAuth ? <HomePage /> : <Navigate to="/" />}
-            />
+            /> */}
 
           </Routes>
         </ThemeProvider>
