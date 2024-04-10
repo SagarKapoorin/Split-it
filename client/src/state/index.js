@@ -36,6 +36,7 @@ export const authSlice = createSlice({
         state.user.friends = action.payload.friends;
         //my motive is to keep chat null if only friends and no chat otherwise add chat
         // if you send atleast one meassage it will added to firends automatically.
+        // moreover i am using websockets at backend not need to store chats like this ,just for safety using it.
       } else {
         console.error("user friends non-existent :(");
       }
