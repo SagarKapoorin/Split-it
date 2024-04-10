@@ -30,5 +30,5 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Friends = mongoose.model("User", UserSchema);
+const Friends = mongoose.model("Friends", UserSchema);
 export default Friends;
