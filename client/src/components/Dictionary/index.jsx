@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './dict.css';
+
 const Dictionary = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [word, setWord] = useState('--');
@@ -8,17 +9,18 @@ const Dictionary = () => {
 
   const search = async () => {
     let input = searchTerm.trim();
+   
     if (input !== '') {
       try {
         const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${input}`);
         const data = await response.json();
-        
+        // console.log(data);
         if (!data.title) {
           setWord(data[0].word);
           setPhonetics(data[0].phonetics[0].text);
           const meanings = data[0].meanings.map(meaning => ({
             partOfSpeech: meaning.partOfSpeech,
-            definition: meaning.definitions[0].definition
+            definiti: meaning.definitions[0].definition
           }));
           setDefinitions(meanings);
         }
@@ -34,7 +36,16 @@ const Dictionary = () => {
 
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
+  };
+
+  const handleSearch = () => {
     search();
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      search();
+    }
   };
 
   return (
@@ -44,15 +55,17 @@ const Dictionary = () => {
         id="search" 
         value={searchTerm} 
         onChange={handleInputChange} 
+        onKeyPress={handleKeyPress}
         placeholder="Search"
       />
+      <button onClick={handleSearch}>Search</button>
       <h1 id="word">{word}</h1>
       <p id="phonetics">{phonetics}</p>
       <div id="definition-container">
         {definitions.map((meaning, index) => (
           <div key={index} className="meaning-container">
             <h4>{meaning.partOfSpeech}</h4>
-            <p>{meaning.definition}</p>
+            <p style={{color:'black'}}>{meaning.definiti}</p>
           </div>
         ))}
       </div>
