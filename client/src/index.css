@@ -45,6 +45,9 @@ body {
   background-color:#f8f9fb ;
   overflow: hidden;
 }
+.Drag{
+  cursor: grabbing;
+}
 ::-webkit-scrollbar {
   width: 11px;
 }

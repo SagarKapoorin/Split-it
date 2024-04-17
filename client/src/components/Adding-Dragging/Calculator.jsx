@@ -40,8 +40,8 @@ const DraggableComponent = () => {
       onMouseMove={drag}
       onMouseUp={endDrag}
     >
-		<div className="hi">
-			<h1>calculator</h1>
+		<div className="Drag">
+			<h2 style={{marginLeft:"37%"}}>Calculator</h2>
 			<button onClick={(e)=>onClose(e.target)}>X</button>
 			{      <Calculator/>}
 		</div>
