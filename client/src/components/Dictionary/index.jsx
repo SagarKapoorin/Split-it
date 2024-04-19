@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import './dict.css';
-
+import { useTheme } from '@emotion/react';
 const Dictionary = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [word, setWord] = useState('--');
   const [phonetics, setPhonetics] = useState('--');
   const [definitions, setDefinitions] = useState([]);
-
+  const theme=useTheme();
+  const background=theme.palette.background.default;
+  const light=theme.palette.neutral.dark;
   const search = async () => {
     let input = searchTerm.trim();
    
@@ -58,14 +60,14 @@ const Dictionary = () => {
         onKeyPress={handleKeyPress}
         placeholder="Search"
       />
-      <button onClick={handleSearch}>Search</button>
+      <button  style={{backgroundColor:`${background}`, border:`1px solid ${light}`,padding:'4px',borderRadius:'10px',cursor:'pointer'}} onClick={handleSearch}>Search</button>
       <h1 id="word">{word}</h1>
       <p id="phonetics">{phonetics}</p>
       <div id="definition-container">
         {definitions.map((meaning, index) => (
           <div key={index} className="meaning-container">
             <h4>{meaning.partOfSpeech}</h4>
-            <p style={{color:'black'}}>{meaning.definiti}</p>
+            <p style={{color:`${light}`}}>{meaning.definiti}</p>
           </div>
         ))}
       </div>

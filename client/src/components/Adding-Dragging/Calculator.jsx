@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import Calculator from '../Calculator';
+import { useTheme } from '@emotion/react';
 const DraggableComponent = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [offset, setOffset] = useState({ xOffset: 0, yOffset: 0 });
-
+  const theme=useTheme();
+  const background=theme.palette.background.default;
   const dragStart = (e) => {
     setIsDragging(true);
     setOffset({
@@ -42,7 +44,7 @@ const DraggableComponent = () => {
     >
 		<div className="Drag">
 			<h2 style={{marginLeft:"37%"}}>Calculator</h2>
-			<button onClick={(e)=>onClose(e.target)}>X</button>
+			<button style={{backgroundColor:`${background}`}} onClick={(e)=>onClose(e.target)}>X</button>
 			{      <Calculator/>}
 		</div>
      
